@@ -6,10 +6,12 @@ export const Navbar = () => {
 	const { cartQuantity } = useCart()
 
 	return (
-		<nav className='bg-slate-300 rounded-xl'>
+		<nav className='bg-slate-300 rounded-xl sticky top-0'>
 			<div className='p-6 flex items-center justify-between'>
 				<div>
-					<h1 className='text-2xl font-bold'>ShopCart</h1>
+					<h1 className='text-2xl font-bold'>
+						<Link to='/'>Shop Cart</Link>
+					</h1>
 				</div>
 
 				<div className='flex gap-6'>
