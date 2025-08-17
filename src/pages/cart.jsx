@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Minus, Plus, Trash } from "lucide-react"
 import { Navbar } from "../components/layout/navbar"
 import { useCart } from "../context/cartContext"
@@ -17,50 +18,57 @@ export const Cart = () => {
 		<main className='p-10'>
 			<Navbar />
 
-			<div className='max-w-[600px] flex flex-col gap-2 mx-auto mt-6 p-4 border-1 border-s-slate-700 rounded-lg'>
-				<p className='text-xl font-bold'>Detalhamento do pedido:</p>
+			{cartQuantity > 0 ? (
+				<div className='max-w-[600px] flex flex-col gap-2 mx-auto mt-6 p-4 border-1 border-s-slate-700 rounded-lg'>
+					<p className='text-xl font-bold'>Detalhamento do pedido:</p>
 
-				{cartItems.map((item) => (
-					<div key={item.id}>
-						<p>{item.title}</p>
-						<p>{formatToBRL(item.price)}</p>
+					{cartItems.map((item) => (
+						<div key={item.id}>
+							<p>{item.title}</p>
+							<p>{formatToBRL(item.price)}</p>
 
-						<div className='flex gap-2'>
-							<p>Quantidade: {item.quantity}</p>
-							<button
-								className='cursor-pointer'
-								type='button'
-								onClick={() => decreaseQuantity(item.id)}
-							>
-								<Minus />
-							</button>
+							<div className='flex gap-2'>
+								<p>Quantidade: {item.quantity}</p>
+								<button
+									className='cursor-pointer'
+									type='button'
+									onClick={() => decreaseQuantity(item.id)}
+								>
+									<Minus />
+								</button>
 
-							<button
-								className='cursor-pointer'
-								type='button'
-								onClick={() => increaseQuantity(item.id)}
-							>
-								<Plus />
-							</button>
+								<button
+									className='cursor-pointer'
+									type='button'
+									onClick={() => increaseQuantity(item.id)}
+								>
+									<Plus />
+								</button>
 
-							<button
-								className='cursor-pointer'
-								type='button'
-								onClick={() => removeFromCart(item.id)}
-							>
-								<Trash />
-							</button>
+								<button
+									className='cursor-pointer'
+									type='button'
+									onClick={() => removeFromCart(item.id)}
+								>
+									<Trash />
+								</button>
+							</div>
 						</div>
-					</div>
-				))}
+					))}
 
-				<div className='flex justify-between mt-4'>
-					<p className='text-lg font-bold'>
-						Quantidade de itens: {cartQuantity}
-					</p>
-					<p className='text-lg font-bold'>Total: {formatToBRL(cartTotal)}</p>
+					<div className='flex justify-between mt-4'>
+						<p className='text-lg font-bold'>
+							Quantidade de itens: {cartQuantity}
+						</p>
+						<p className='text-lg font-bold'>Total: {formatToBRL(cartTotal)}</p>
+					</div>
 				</div>
-			</div>
+			) : (
+				<div>
+					<h1>Seu carrinho está vazio!</h1>
+					<Link to='/'>Continue comprando</Link>
+				</div>
+			)}
 		</main>
 	)
 }

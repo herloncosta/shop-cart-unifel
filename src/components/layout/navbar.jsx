@@ -17,8 +17,10 @@ export const Navbar = () => {
 					<Link to='/cart'>Carrinho</Link>
 					<Link to='/login'>Login</Link>
 
-					<div className='flex gap-1'>
-						<span>{cartQuantity}</span>
+					<div className='flex gap-1 relative'>
+						<span className='size-4 rounded-full flex items-center justify-center bg-slate-950 text-slate-50 absolute -right-1 -top-1'>
+							{cartQuantity}
+						</span>
 						<ShoppingCart />
 					</div>
 				</div>
