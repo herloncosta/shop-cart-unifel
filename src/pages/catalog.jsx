@@ -1,3 +1,5 @@
+import { HashLoader } from "react-spinners"
+import { Navbar } from "../components/layout/navbar"
 import { ProductItem } from "../components/layout/product-item"
 import { useFetch } from "../hooks/useFetch"
 
@@ -9,7 +11,11 @@ export const Catalog = () => {
 	} = useFetch("https://fakestoreapi.com/products")
 
 	if (isLoading) {
-		return <h1>Loading...</h1>
+		return (
+			<main className='h-screen flex justify-center items-center'>
+				<HashLoader />
+			</main>
+		)
 	}
 
 	if (error) {
@@ -18,10 +24,8 @@ export const Catalog = () => {
 
 	return (
 		<main className='p-10'>
-			<section>
-				<h1>Produtos</h1>
-			</section>
-			<section className='p-10 grid grid-cols-4 gap-4'>
+			<Navbar />
+			<section className='max-w-[1200px] mx-auto mt-20 grid grid-cols-4 gap-4'>
 				{products.map((product) => (
 					<ProductItem key={product.id} product={product} />
 				))}

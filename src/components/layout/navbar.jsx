@@ -1,0 +1,28 @@
+import { ShoppingCart } from "lucide-react"
+import { Link } from "react-router-dom"
+import { useCart } from "../../context/cartContext"
+
+export const Navbar = () => {
+	const { cartQuantity } = useCart()
+
+	return (
+		<nav className='bg-slate-300 rounded-xl'>
+			<div className='p-6 flex items-center justify-between'>
+				<div>
+					<h1 className='text-2xl font-bold'>ShopCart</h1>
+				</div>
+
+				<div className='flex gap-6'>
+					<Link to='/'>Produtos</Link>
+					<Link to='/cart'>Carrinho</Link>
+					<Link to='/login'>Login</Link>
+
+					<div className='flex gap-1'>
+						<span>{cartQuantity}</span>
+						<ShoppingCart />
+					</div>
+				</div>
+			</div>
+		</nav>
+	)
+}
