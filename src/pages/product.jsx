@@ -3,9 +3,9 @@ import { useFetch } from "../hooks/useFetch"
 import { formatToBRL } from "../utils"
 import { Navbar } from "../components/layout/navbar"
 import { Button } from "../components/ui/button"
-import { Star } from "lucide-react"
 import { useCart } from "../context/cartContext"
 import { HashLoader } from "react-spinners"
+import { RenderStars } from "../components/ui/render-stars"
 
 export const Product = () => {
 	const { id } = useParams()
@@ -16,19 +16,6 @@ export const Product = () => {
 	} = useFetch(`https://fakestoreapi.com/products/${id}`)
 
 	const { addToCart } = useCart()
-
-	const renderStars = (rating) => {
-		const stars = []
-		for (let i = 1; i <= 5; i++) {
-			if (i <= rating) {
-				stars.push(<Star key={i} color='#ffc107' fill='#ffc107' />)
-			} else {
-				stars.push(<Star key={i} color='#ccc' />)
-			}
-		}
-
-		return stars
-	}
 
 	if (isLoading) {
 		return (
@@ -55,10 +42,7 @@ export const Product = () => {
 					<h1 className='text-xl font-bold'>{product.title}</h1>
 					<h2 className='text-2xl font-bold'>{formatToBRL(product.price)}</h2>
 
-					<div>
-						<p className='flex gap-1'>{renderStars(product.rating?.rate)}</p>
-						<p>{product.rating?.count} avaliações</p>
-					</div>
+					<RenderStars rating={product.rating} size={20} />
 
 					<div className='mt-4'>
 						<p className='text-lg font-medium'>Detalhes do produto</p>

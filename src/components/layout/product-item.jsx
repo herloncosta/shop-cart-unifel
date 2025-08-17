@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { formatToBRL } from "../../utils"
+import { RenderStars } from "../ui/render-stars"
 
 export const ProductItem = ({ product }) => {
 	return (
@@ -17,6 +18,9 @@ export const ProductItem = ({ product }) => {
 					<div className='p-3'>
 						<h3 className='text-lg font-medium truncate'>{product.title}</h3>
 						<p className='text-sm truncate'>{product.description}</p>
+
+						<RenderStars rating={product.rating} size={15} />
+
 						<p className='text-xl font-bold mt-2'>
 							{formatToBRL(product.price)}
 						</p>
