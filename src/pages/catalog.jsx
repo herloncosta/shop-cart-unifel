@@ -23,12 +23,27 @@ export const Catalog = () => {
 	}
 
 	return (
-		<main className='p-10'>
+		<main className='p-10 bg-slate-50'>
 			<Navbar />
-			<section className='max-w-[1200px] mx-auto mt-20 grid grid-cols-4 gap-4'>
-				{products.map((product) => (
-					<ProductItem key={product.id} product={product} />
-				))}
+
+			<div className='max-w-[1200px] h-[400px] mx-auto mt-6'>
+				<img
+					src='/banner.webp'
+					alt='Banner principal do catálogo'
+					className='w-full h-full object-cover rounded-xl'
+				/>
+			</div>
+
+			<section className='max-w-[1200px] mx-auto mt-20'>
+				<div>
+					<h2 className='text-xl font-medium'>Mais vendidos nessa semana</h2>
+				</div>
+
+				<div className='grid grid-cols-4 gap-4 mt-10'>
+					{products.map((product) => (
+						<ProductItem key={product.id} product={product} />
+					))}
+				</div>
 			</section>
 		</main>
 	)

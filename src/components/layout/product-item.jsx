@@ -8,7 +8,7 @@ export const ProductItem = ({ product }) => {
 	const { addToCart } = useCart()
 
 	return (
-		<div className='p-6 rounded-xl hover:shadow-xl transition-shadow duration-300 cursor-pointer'>
+		<div className='p-6 rounded-xl hover:shadow-xl hover:bg-white transition-shadow duration-300 cursor-pointer'>
 			<Link to={`/product/${product.id}`}>
 				<div className='flex flex-col gap-2 justify-center'>
 					<div className='w-full h-[300px]'>
