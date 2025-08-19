@@ -1,13 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import {
-	ArrowRight,
-	Minus,
-	Plus,
-	ShoppingBasket,
-	ShoppingCart,
-	Store,
-	Trash,
-} from "lucide-react"
+import { ArrowRight, Minus, Plus, ShoppingBasket, Trash } from "lucide-react"
 import { Navbar } from "../components/layout/navbar"
 import { useCart } from "../context/cartContext"
 import { formatToBRL } from "../utils"

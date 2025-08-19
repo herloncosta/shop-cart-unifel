@@ -1,6 +1,7 @@
 import { Heart, ShoppingCart, User } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useCart } from "../../context/cartContext"
+import { ProductSearch } from "./product-search"
 
 export const Navbar = () => {
 	const { cartQuantity } = useCart()
@@ -13,6 +14,8 @@ export const Navbar = () => {
 						<Link to='/'>Shop Cart</Link>
 					</h1>
 				</div>
+
+				<ProductSearch />
 
 				<div className='flex gap-6'>
 					<Link to='/login'>
