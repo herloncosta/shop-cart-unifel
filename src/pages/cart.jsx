@@ -1,9 +1,18 @@
 import { Link, useNavigate } from "react-router-dom"
-import { ArrowRight, Minus, Plus, Trash } from "lucide-react"
+import {
+	ArrowRight,
+	Minus,
+	Plus,
+	ShoppingBasket,
+	ShoppingCart,
+	Store,
+	Trash,
+} from "lucide-react"
 import { Navbar } from "../components/layout/navbar"
 import { useCart } from "../context/cartContext"
 import { formatToBRL } from "../utils"
 import { RenderStars } from "../components/ui/render-stars"
+import { Button } from "../components/ui/button"
 
 export const Cart = () => {
 	const {
@@ -132,12 +141,13 @@ export const Cart = () => {
 						/>
 					</div>
 
-					<Link
-						to='/'
-						className='text-xl font-bold py-4 px-8 bg-slate-500 text-white rounded'
+					<Button
+						onClick={() => navigate("/")}
+						className='flex items-center gap-2 mt-10 w-fit hover:bg-slate-700 transition'
 					>
-						Continue comprando
-					</Link>
+						Continuar comprando
+						<ShoppingBasket />
+					</Button>
 				</div>
 			)}
 		</main>
