@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useFetch } from "../hooks/useFetch"
 import { formatToBRL } from "../utils"
 import { Navbar } from "../components/layout/navbar"
@@ -14,7 +14,7 @@ export const Product = () => {
 		isLoading,
 		error,
 	} = useFetch(`https://fakestoreapi.com/products/${id}`)
-
+	const navigate = useNavigate()
 	const { addToCart } = useCart()
 
 	if (isLoading) {
@@ -39,6 +39,9 @@ export const Product = () => {
 				</div>
 
 				<div className='max-w-[500px] flex flex-col gap-2'>
+					<span className='w-fit px-3 py-1 rounded-md text-sm font-semibold bg-slate-200'>
+						{product.category}
+					</span>
 					<h1 className='text-xl font-bold'>{product.title}</h1>
 					<h2 className='text-2xl font-bold'>{formatToBRL(product.price)}</h2>
 
@@ -52,6 +55,14 @@ export const Product = () => {
 					<div>
 						<Button onClick={() => addToCart(product)}>
 							Adicionar ao carrinho
+						</Button>
+					</div>
+
+					<div className='flex gap-2'>
+						<Button onClick={() => navigate("/")}>Continuar comprando</Button>
+
+						<Button onClick={() => navigate("/cart")}>
+							Ir para o carrinho
 						</Button>
 					</div>
 				</div>

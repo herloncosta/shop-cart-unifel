@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom"
-import { Minus, Plus, Trash } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
+import { ArrowRight, Minus, Plus, Trash } from "lucide-react"
 import { Navbar } from "../components/layout/navbar"
 import { useCart } from "../context/cartContext"
 import { formatToBRL } from "../utils"
+import { RenderStars } from "../components/ui/render-stars"
 
 export const Cart = () => {
 	const {
@@ -13,6 +14,7 @@ export const Cart = () => {
 		increaseQuantity,
 		decreaseQuantity,
 	} = useCart()
+	const navigate = useNavigate()
 
 	return (
 		<main className='p-10'>
@@ -24,61 +26,100 @@ export const Cart = () => {
 
 			{cartQuantity > 0 ? (
 				<div className='max-w-[1200px] flex flex-col gap-2 mx-auto mt-6'>
-					<p className='text-xl font-semi'>Detalhamento do pedido:</p>
+					<div className='mt-6'>
+						<p className='text-lg font-medium'>
+							{cartQuantity} itens no carrinho
+						</p>
+					</div>
 
-					{cartItems.map((item) => (
-						<div key={item.id} className='border-b-2 border-slate-300 py-2'>
-							<div className='flex gap-6'>
-								<Link to={`/product/${item.id}`}>
-									<div className='w-24 h-24'>
-										<img
-											className='w-full h-full object-contain'
-											src={item.image}
-											alt={item.title}
-										/>
-									</div>
-								</Link>
+					<div className='flex gap-16'>
+						<div>
+							{cartItems.map((item) => (
+								<div key={item.id} className='mt-2 flex'>
+									<div className='flex gap-6 justify-between border-b-2 border-slate-300 py-2 w-full'>
+										<Link to={`/product/${item.id}`}>
+											<div className='w-24 h-24'>
+												<img
+													className='w-full h-full object-contain'
+													src={item.image}
+													alt={item.title}
+												/>
+											</div>
+										</Link>
 
-								<div>
-									<p>Item: {item.title}</p>
-									<p>Preço: {formatToBRL(item.price)}</p>
-									<p>Quantidade: {item.quantity}</p>
+										<div className='max-w-lg flex-1'>
+											<div>
+												<p className='font-medium'>{item.title}</p>
+												<p className='text-xs truncate'>{item.description}</p>
+											</div>
 
-									<div className='flex gap-2 mt-2'>
-										<button
-											className='cursor-pointer'
-											type='button'
-											onClick={() => decreaseQuantity(item.id)}
-										>
-											<Minus size={15} />
-										</button>
+											<div>
+												<RenderStars rating={item.rating} size={12} text />
+											</div>
+										</div>
 
-										<button
-											className='cursor-pointer'
-											type='button'
-											onClick={() => increaseQuantity(item.id)}
-										>
-											<Plus size={15} />
-										</button>
+										<div className='flex gap-3 items-start'>
+											<button
+												className='cursor-pointer p-1 rounded-md hover:bg-slate-100 transition'
+												type='button'
+												onClick={() => decreaseQuantity(item.id)}
+											>
+												<Minus size={15} />
+											</button>
 
-										<button
-											className='cursor-pointer'
-											type='button'
-											onClick={() => removeFromCart(item.id)}
-										>
-											<Trash size={15} />
-										</button>
+											<button
+												className='cursor-pointer p-1 rounded-md hover:bg-slate-100 transition'
+												type='button'
+												onClick={() => increaseQuantity(item.id)}
+											>
+												<Plus size={15} />
+											</button>
+
+											<button
+												className='cursor-pointer p-1 rounded-md hover:bg-red-200 transition'
+												type='button'
+												onClick={() => removeFromCart(item.id)}
+											>
+												<Trash size={15} />
+											</button>
+										</div>
+
+										<div className='text-right'>
+											<p>
+												<span className='text-sm'>Preço unitário: </span>{" "}
+												<span className='font-medium'>
+													{formatToBRL(item.price)}
+												</span>
+											</p>
+											<p>
+												<span className='text-sm'>Total: </span>
+												<span className='font-medium'>
+													{formatToBRL(item.price * item.quantity)}
+												</span>
+											</p>
+											<p>
+												<span className='text-sm'>Unidades: </span>
+												<span className='font-medium'>{item.quantity}</span>
+											</p>
+										</div>
 									</div>
 								</div>
-							</div>
+							))}
 						</div>
-					))}
 
-					<div className='flex justify-between mt-4'>
-						<p className='text-lg font-bold'>
-							{cartQuantity} itens no carrinho.
-						</p>
-						<p className='text-xl font-bold'>Total: {formatToBRL(cartTotal)}</p>
+						<div>
+							<h3 className='text-2xl font-medium'>Total:</h3>
+							<p className='text-4xl font-bold'>{formatToBRL(cartTotal)}</p>
+
+							<button
+								type='button'
+								className='flex items-center gap-2 px-4 py-2 mt-4 bg-slate-500 text-white rounded font-bold cursor-pointer hover:bg-slate-600 transition'
+								onClick={() => navigate("/checkout")}
+							>
+								Ir para o checkout
+								<ArrowRight />
+							</button>
+						</div>
 					</div>
 				</div>
 			) : (
@@ -86,10 +127,11 @@ export const Cart = () => {
 					<div className='max-w-lg'>
 						<img
 							className='w-full h-full object-contain'
-							src='/public/carrinho-vazio.png'
+							src='/carrinho-vazio.png'
 							alt='Imagem carrinho vazio'
 						/>
 					</div>
+
 					<Link
 						to='/'
 						className='text-xl font-bold py-4 px-8 bg-slate-500 text-white rounded'

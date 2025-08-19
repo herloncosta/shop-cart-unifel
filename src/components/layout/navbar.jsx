@@ -1,4 +1,4 @@
-import { ShoppingCart } from "lucide-react"
+import { Heart, ShoppingCart, User } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useCart } from "../../context/cartContext"
 
@@ -15,16 +15,20 @@ export const Navbar = () => {
 				</div>
 
 				<div className='flex gap-6'>
-					<Link to='/'>Produtos</Link>
-					<Link to='/cart'>Carrinho</Link>
-					<Link to='/login'>Login</Link>
-
-					<div className='flex gap-1 relative'>
-						<span className='size-4 rounded-full flex items-center justify-center bg-slate-950 text-slate-50 absolute -right-1 -top-1'>
-							{cartQuantity}
-						</span>
-						<ShoppingCart />
-					</div>
+					<Link to='/login'>
+						<User />
+					</Link>
+					<Link to='/favorites'>
+						<Heart />
+					</Link>
+					<Link to='/cart'>
+						<div className='flex gap-1 relative'>
+							<span className='size-4 rounded-full flex items-center justify-center bg-slate-950 text-slate-50 absolute -right-1 -top-1'>
+								{cartQuantity}
+							</span>
+							<ShoppingCart />
+						</div>
+					</Link>
 				</div>
 			</div>
 		</nav>

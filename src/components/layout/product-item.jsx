@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom"
 import { formatToBRL } from "../../utils"
 import { RenderStars } from "../ui/render-stars"
+import { Button } from "../ui/button"
+import { useCart } from "../../context/cartContext"
 
 export const ProductItem = ({ product }) => {
+	const { addToCart } = useCart()
+
 	return (
 		<div className='p-6 rounded-xl hover:shadow-xl transition-shadow duration-300 cursor-pointer'>
 			<Link to={`/product/${product.id}`}>
@@ -28,6 +32,12 @@ export const ProductItem = ({ product }) => {
 					</div>
 				</div>
 			</Link>
+
+			<div>
+				<Button onClick={() => addToCart(product)}>
+					Adicionar ao carrinho
+				</Button>
+			</div>
 		</div>
 	)
 }
