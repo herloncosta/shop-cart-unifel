@@ -6,6 +6,7 @@ import { Button } from "../components/ui/button"
 import { useCart } from "../context/cartContext"
 import { HashLoader } from "react-spinners"
 import { RenderStars } from "../components/ui/render-stars"
+import { ShippingCalculator } from "../components/layout/shipping-calculator"
 
 export const Product = () => {
 	const { id } = useParams()
@@ -52,7 +53,11 @@ export const Product = () => {
 						<p>{product.description}</p>
 					</div>
 
-					<div>
+					<div className='mt-4'>
+						<ShippingCalculator />
+					</div>
+
+					<div className='mt-6'>
 						<Button onClick={() => addToCart(product)}>
 							Adicionar ao carrinho
 						</Button>
