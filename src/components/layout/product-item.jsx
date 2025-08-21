@@ -1,11 +1,27 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { formatToBRL } from "../../utils"
 import { RenderStars } from "../ui/render-stars"
 import { Button } from "../ui/button"
 import { useCart } from "../../context/cartContext"
+import { ShoppingBag, ShoppingCart } from "lucide-react"
+import { toast } from "sonner"
 
 export const ProductItem = ({ product }) => {
 	const { addToCart } = useCart()
+	const navigate = useNavigate()
+
+	const handleBuyNow = () => {
+		addToCart(product)
+		navigate("/cart")
+	}
+
+	const handleAddToCart = () => {
+		addToCart(product)
+		toast.success("Produto adicionado ao carrinho!", {
+			duration: 2000,
+			position: "top-right",
+		})
+	}
 
 	return (
 		<div className='p-6 rounded-xl hover:shadow-xl hover:bg-white transition-shadow duration-300 cursor-pointer'>
@@ -33,9 +49,20 @@ export const ProductItem = ({ product }) => {
 				</div>
 			</Link>
 
-			<div>
-				<Button onClick={() => addToCart(product)}>
-					Adicionar ao carrinho
+			<div className='flex gap-1'>
+				<Button
+					className='flex justify-between items-center hover:bg-slate-700 transition ease-in-out duration-300'
+					onClick={() => handleBuyNow()}
+				>
+					Comprar agora
+					<ShoppingBag size={20} />
+				</Button>
+
+				<Button
+					className='w-fit hover:bg-slate-700 transition ease-in-out duration-300'
+					onClick={() => handleAddToCart()}
+				>
+					<ShoppingCart size={20} />
 				</Button>
 			</div>
 		</div>
