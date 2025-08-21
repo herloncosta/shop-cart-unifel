@@ -7,6 +7,9 @@ import { useCart } from "../context/cartContext"
 import { HashLoader } from "react-spinners"
 import { RenderStars } from "../components/ui/render-stars"
 import { ShippingCalculator } from "../components/layout/shipping-calculator"
+import { ShoppingCart } from "lucide-react"
+import { toast } from "sonner"
+import { ZoomImage } from "../components/layout/zoom-image"
 
 export const Product = () => {
 	const { id } = useParams()
@@ -17,6 +20,14 @@ export const Product = () => {
 	} = useFetch(`https://fakestoreapi.com/products/${id}`)
 	const navigate = useNavigate()
 	const { addToCart } = useCart()
+
+	const handleAddToCart = () => {
+		addToCart(product)
+		toast.success("Produto adicionado ao carrinho!", {
+			duration: 2000,
+			position: "top-right",
+		})
+	}
 
 	if (isLoading) {
 		return (
@@ -36,7 +47,7 @@ export const Product = () => {
 
 			<section className='max-w-[1200px] mx-auto mt-20 flex'>
 				<div className='flex-1'>
-					<img src={product.image} alt={product.description} />
+					<ZoomImage src={product.image} alt={product.description} />
 				</div>
 
 				<div className='max-w-[500px] flex flex-col gap-2'>
@@ -57,17 +68,26 @@ export const Product = () => {
 						<ShippingCalculator />
 					</div>
 
-					<div className='mt-6'>
-						<Button onClick={() => addToCart(product)}>
-							Adicionar ao carrinho
+					<div className='flex gap-2 mt-6'>
+						<Button
+							className='hover:bg-slate-700 transition ease-in-out duration-300'
+							onClick={() => navigate("/")}
+						>
+							Continuar comprando
 						</Button>
-					</div>
 
-					<div className='flex gap-2'>
-						<Button onClick={() => navigate("/")}>Continuar comprando</Button>
-
-						<Button onClick={() => navigate("/cart")}>
+						<Button
+							className='hover:bg-slate-700 transition ease-in-out duration-300'
+							onClick={() => navigate("/cart")}
+						>
 							Ir para o carrinho
+						</Button>
+
+						<Button
+							className='w-fit hover:bg-slate-700 transition ease-in-out duration-300'
+							onClick={() => handleAddToCart()}
+						>
+							<ShoppingCart size={20} />
 						</Button>
 					</div>
 				</div>
