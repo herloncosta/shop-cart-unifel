@@ -99,6 +99,7 @@ export const CartProvider = ({ children }) => {
 				clearCart,
 				cartTotal,
 				cartQuantity,
+				existingItem: (id) => state.cartItems.some((item) => item.id === id),
 			}}
 		>
 			{children}

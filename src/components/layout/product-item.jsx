@@ -5,9 +5,11 @@ import { Button } from "../ui/button"
 import { useCart } from "../../context/cartContext"
 import { ShoppingBag, ShoppingCart } from "lucide-react"
 import { toast } from "sonner"
+import { imageToast } from "../ui/toast-image"
 
 export const ProductItem = ({ product }) => {
-	const { addToCart } = useCart()
+	const { addToCart, removeFromCart, decreaseQuantity, existingItem } =
+		useCart()
 	const navigate = useNavigate()
 
 	const handleBuyNow = () => {
@@ -17,10 +19,7 @@ export const ProductItem = ({ product }) => {
 
 	const handleAddToCart = () => {
 		addToCart(product)
-		toast.success("Produto adicionado ao carrinho!", {
-			duration: 2000,
-			position: "top-right",
-		})
+		imageToast(product, existingItem, removeFromCart, decreaseQuantity)
 	}
 
 	return (

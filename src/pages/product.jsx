@@ -10,6 +10,7 @@ import { ShippingCalculator } from "../components/layout/shipping-calculator"
 import { ShoppingCart } from "lucide-react"
 import { toast } from "sonner"
 import { ZoomImage } from "../components/layout/zoom-image"
+import { imageToast } from "../components/ui/toast-image"
 
 export const Product = () => {
 	const { id } = useParams()
@@ -19,14 +20,12 @@ export const Product = () => {
 		error,
 	} = useFetch(`https://fakestoreapi.com/products/${id}`)
 	const navigate = useNavigate()
-	const { addToCart } = useCart()
+	const { addToCart, existingItem, removeFromCart, decreaseQuantity } =
+		useCart()
 
 	const handleAddToCart = () => {
 		addToCart(product)
-		toast.success("Produto adicionado ao carrinho!", {
-			duration: 2000,
-			position: "top-right",
-		})
+		imageToast(product, existingItem, removeFromCart, decreaseQuantity)
 	}
 
 	if (isLoading) {
