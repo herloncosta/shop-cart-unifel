@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 export const ShippingCalculator = () => {
 	const [cep, setCep] = useState("")
@@ -8,6 +9,9 @@ export const ShippingCalculator = () => {
 
 	const handleSearchCep = async () => {
 		try {
+			if (cep.length < 8) {
+				return
+			}
 			const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
 			const cepData = await response.json()
 
@@ -35,11 +39,11 @@ export const ShippingCalculator = () => {
 	}
 
 	return (
-		<div className='space-y-4'>
-			<div className='flex justify-between items-center'>
+		<div className='space-y-4 border border-slate-200 rounded-md p-4'>
+			<div className=''>
 				<p className='text-md font-medium'>Calcular frete + entrega</p>
 
-				<div className='flex gap-2'>
+				<div className='flex gap-2 mt-2'>
 					<input
 						className='max-w-40 outline-0 border border-slate-800 rounded-md p-2'
 						type='text'
@@ -60,6 +64,16 @@ export const ShippingCalculator = () => {
 			</div>
 
 			<div>
+				<Link
+					to='https://buscacepinter.correios.com.br/app/endereco/index.php'
+					target='_blank'
+					className='text-sm text-blue-600 hover:underline'
+				>
+					Não sei meu CEP
+				</Link>
+			</div>
+
+			<div>
 				{location && (
 					<div>
 						<p>
@@ -74,7 +88,8 @@ export const ShippingCalculator = () => {
 					</div>
 				)}
 
-				{locationError && <p>{locationError}</p>}
+				{locationError && <p>Falha ao buscar CEP.</p>}
+				{locationLoading && <p>Buscando CEP...</p>}
 			</div>
 		</div>
 	)
