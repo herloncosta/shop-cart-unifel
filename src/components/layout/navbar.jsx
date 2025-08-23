@@ -7,7 +7,7 @@ export const Navbar = () => {
 	const { cartQuantity } = useCart()
 
 	return (
-		<nav className='bg-slate-300 sticky top-0'>
+		<nav className='bg-slate-300 sticky top-0 z-50 shadow-md border-b-2 border-slate-400'>
 			<div className='max-w-[1200px] mx-auto py-6 flex items-center justify-between'>
 				<div>
 					<h1 className='text-2xl font-bold'>
