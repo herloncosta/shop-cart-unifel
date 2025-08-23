@@ -11,7 +11,7 @@ export function Footer() {
 					<div className='grid md:grid-cols-3 gap-8 mb-8'>
 						<div>
 							<div className='font-bold text-2xl text-primary mb-4'>
-								{"ShopCart Unifel"}
+								UniShop
 							</div>
 							<p className='text-muted-foreground leading-relaxed'>
 								Trabalho de conclusão de curso desenvolvido por Herlon Costa,
