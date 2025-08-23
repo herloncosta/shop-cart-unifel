@@ -11,7 +11,7 @@ export const Navbar = () => {
 			<div className='max-w-[1200px] mx-auto py-6 flex items-center justify-between'>
 				<div>
 					<h1 className='text-2xl font-bold'>
-						<Link to='/'>UniShop</Link>
+						<Link to='/'>UniStore</Link>
 					</h1>
 				</div>
 
