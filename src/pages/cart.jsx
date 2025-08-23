@@ -19,10 +19,9 @@ export const Cart = () => {
 	const navigate = useNavigate()
 
 	return (
-		<>
+		<div className='flex flex-col min-h-screen'>
 			<Navbar />
-
-			<main>
+			<main className='flex-1'>
 				<div className='max-w-[1200px] mx-auto mt-10'>
 					<h1 className='text-3xl font-bold mt-6'>Carrinho de compras</h1>
 				</div>
@@ -146,6 +145,6 @@ export const Cart = () => {
 				)}
 			</main>
 			<Footer />
-		</>
+		</div>
 	)
 }
