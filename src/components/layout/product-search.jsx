@@ -49,7 +49,7 @@ export const ProductSearch = () => {
 					onChange={handleSearchChange}
 					onFocus={handleFocus}
 					onBlur={handleBlur}
-					className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200'
+					className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all duration-200'
 				/>
 				<Search className='absolute top-3 right-3 text-gray-400' />
 			</div>
