@@ -13,6 +13,7 @@ export function App() {
 		<CartProvider>
 			<Router>
 				<Routes>
+					<Route path='*' element={<Catalog />} />
 					<Route path='/' element={<Catalog />} />
 					<Route path='/product/:id' element={<Product />} />
 					<Route path='/login' element={<Login />} />
