@@ -4,9 +4,7 @@ export const validateEmail = (email) => {
 }
 
 export const validatePassword = (password) => {
-	return password.length >= 8
-}
-
-export const validateForm = (email, password) => {
-	return validateEmail(email) && validatePassword(password)
+	const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/
+	if (!re.test(password)) return false
+	return true
 }

@@ -1,52 +1,55 @@
 import { useState } from "react"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
-import { validateEmail, validateForm } from "../utils/validations"
+import { validateEmail } from "../utils/validations"
 import { useNavigate } from "react-router-dom"
+import { InputPassword } from "../components/ui/input-password"
 
 export const Login = () => {
-	const [email, setEmail] = useState("")
-	const [password, setPassword] = useState("")
-	const [emailError, setEmailError] = useState("")
-	const [passwordError, setPasswordError] = useState("")
-	const [isSubmitting, setIsSubmitting] = useState(false)
+	const [formData, setFormData] = useState({
+		email: "",
+		password: "",
+	})
+	const [errors, setErrors] = useState({})
 	const navigate = useNavigate()
 
-	const handleEmailChange = (e) => {
-		const value = e.target.value
-		setEmail(e.target.value)
+	const handleChange = (e) => {
+		const { name, value } = e.target
 
-		value && !validateEmail(value)
-			? setEmailError("Email inválido")
-			: setEmailError("")
-	}
+		setFormData((prevData) => ({
+			...prevData,
+			[name]: value,
+		}))
 
-	const handlePasswordChange = (e) => {
-		const value = e.target.value
-		setPassword(e.target.value)
-
-		value && value.length < 8
-			? setPasswordError("Senha inválida")
-			: setPasswordError("")
-	}
-
-	const handleSubmit = async (e) => {
-		e.preventDefault()
-		if (!validateForm(email, password)) return
-		setIsSubmitting(true)
-
-		try {
-			// simulando chamada de API
-			await new Promise((resolve) => setTimeout(resolve, 2000))
-			navigate("/")
-		} catch (err) {
-			console.log(err)
-		} finally {
-			setIsSubmitting(false)
+		if (errors[name]) {
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				[name]: "",
+			}))
 		}
 	}
 
-	const isFormValid = validateForm(email, password) && !isSubmitting
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		const newErrors = {}
+		if (!formData.email) newErrors.email = "Email é obrigatório"
+		if (!validateEmail(formData.email))
+			newErrors.email = "Formato de email inválido"
+		if (!formData.password) newErrors.password = "Senha é obrigatória"
+
+		if (Object.keys(newErrors).length > 0) {
+			setErrors(newErrors)
+			return
+		}
+
+		return new Promise((resolve) =>
+			setTimeout(() => {
+				resolve()
+				navigate("/dashboard")
+			}, 2000),
+		)
+	}
+
 	return (
 		<main className='h-screen'>
 			<div className='h-full grid grid-cols-2'>
@@ -71,30 +74,23 @@ export const Login = () => {
 								<Input
 									type='email'
 									label='Email'
+									name='email'
 									placeholder='Digite seu email'
+									value={formData.email}
+									onChange={handleChange}
+									error={errors.email}
 									required
-									error={emailError}
-									value={email}
-									onChange={handleEmailChange}
 								/>
 
-								<Input
-									type='password'
-									label='Senha'
+								<InputPassword
+									name='password'
 									placeholder='Digite sua senha'
+									value={formData.password}
+									onChange={handleChange}
 									required
-									error={passwordError}
-									value={password}
-									onChange={handlePasswordChange}
 								/>
 
-								<Button
-									type='submit'
-									disabled={!isFormValid}
-									onClick={handleSubmit}
-								>
-									Entrar
-								</Button>
+								<Button type='submit'>Entrar</Button>
 							</form>
 						</div>
 					</div>

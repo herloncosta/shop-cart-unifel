@@ -1,9 +1,17 @@
+import { Eye, EyeClosed } from "lucide-react"
+import { useState } from "react"
 import { twMerge } from "tailwind-merge"
 
-export const Input = (
-	{ label, error, type, className = "", variant = "default", ...props },
+export const InputPassword = (
+	{ label = "Senha", error, className = "", ...props },
 	ref,
 ) => {
+	const [showPassword, setShowPassword] = useState(false)
+
+	const togglePasswordVisibility = () => {
+		setShowPassword(!showPassword)
+	}
+
 	const baseClasses =
 		"w-full px-4 py-3 rounded-md border focus:outline-none transition-all duration-200"
 
@@ -21,32 +29,28 @@ export const Input = (
 	)
 
 	return (
-		<div className='w-full mb-4'>
+		<div>
 			{label && (
 				<label className='block text-sm font-medium text-gray-700 mb-1'>
 					{label}
+
 					<div className='relative'>
 						<input
-							ref={ref}
+							type={showPassword ? "text" : "password"}
 							className={inputClasses}
-							type={type}
-							autoComplete='off'
+							ref={ref}
+							autoComplete='current-password'
 							{...props}
 						/>
+						<button
+							onClick={togglePasswordVisibility}
+							type='button'
+							className='absolute right-2 top-2.5'
+						>
+							{showPassword ? <Eye /> : <EyeClosed />}
+						</button>
 					</div>
 				</label>
-			)}
-
-			{!label && (
-				<div className='relative'>
-					<input
-						ref={ref}
-						className={inputClasses}
-						type={type}
-						autoComplete='off'
-						{...props}
-					/>
-				</div>
 			)}
 
 			{error && <p className='mt-1 text-sm text-red-600'>{error}</p>}
