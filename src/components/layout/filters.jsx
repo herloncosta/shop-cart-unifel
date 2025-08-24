@@ -8,7 +8,7 @@ const CATEGORIES = [
 	"women's clothing",
 ]
 
-const RATINGS = [5, 4, 3, 2, 1]
+const RATINGS = [4, 3, 2, 1]
 
 export const Filters = ({ products, onFilterChange, className = "" }) => {
 	const [selectedCategories, setSelectedCategories] = useState([])
