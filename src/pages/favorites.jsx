@@ -1,13 +1,22 @@
 import { Footer } from "../components/layout/footer"
 import { Navbar } from "../components/layout/navbar"
+import { useFavoritesStore } from "../store/favorites-store"
+import { ProductItem } from "../components/layout/product-item"
 
 export const Favorites = () => {
+	const { favorites, getFavoritesCount } = useFavoritesStore()
+
 	return (
 		<div className='flex flex-col min-h-screen'>
 			<Navbar />
-			<main className='flex-1 flex flex-col items-center justify-center'>
-				<h1 className='text-3xl font-bold mb-4'>Favorites Page</h1>
-				<p>This is where the favorites process will be implemented.</p>
+			<main className='max-w-[1200px] mx-auto'>
+				<h2>{getFavoritesCount()} favoritos adicionados</h2>
+
+				<div className='grid grid-cols-4 gap-6'>
+					{favorites?.map((product) => {
+						return <ProductItem key={product.id} product={product} />
+					})}
+				</div>
 			</main>
 			<Footer />
 		</div>

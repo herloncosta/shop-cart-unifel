@@ -11,6 +11,7 @@ import { ShoppingCart } from "lucide-react"
 import { ZoomImage } from "../components/layout/zoom-image"
 import { imageToast } from "../components/ui/toast-image"
 import { Footer } from "../components/layout/footer"
+import { FavoriteButton } from "../components/ui/favorite-button"
 
 export const Product = () => {
 	const { id } = useParams()
@@ -50,13 +51,21 @@ export const Product = () => {
 					</div>
 
 					<div className='max-w-[500px] flex flex-col gap-2'>
-						<span className='w-fit px-3 py-1 rounded-md text-sm font-semibold bg-slate-200'>
-							{product.category}
-						</span>
-						<h1 className='text-xl font-bold'>{product.title}</h1>
-						<h2 className='text-2xl font-bold'>{formatToBRL(product.price)}</h2>
+						<div className='flex justify-between items-center'>
+							<span className='w-fit px-3 py-1 rounded-md text-sm font-semibold bg-slate-200'>
+								{product.category}
+							</span>
+							<FavoriteButton product={product} />
+						</div>
 
-						<RenderStars rating={product.rating} size={20} />
+						<div>
+							<h1 className='text-xl font-bold'>{product.title}</h1>
+							<h2 className='text-2xl font-bold'>
+								{formatToBRL(product.price)}
+							</h2>
+
+							<RenderStars rating={product.rating} size={20} />
+						</div>
 
 						<div className='mt-4'>
 							<p className='text-lg font-medium'>Detalhes do produto</p>

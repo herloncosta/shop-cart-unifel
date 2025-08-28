@@ -5,6 +5,7 @@ import { Button } from "../ui/button"
 import { useCart } from "../../context/cartContext"
 import { ShoppingBag, ShoppingCart } from "lucide-react"
 import { imageToast } from "../ui/toast-image"
+import { FavoriteButton } from "../ui/favorite-button"
 
 export const ProductItem = ({ product }) => {
 	const { addToCart, removeFromCart, decreaseQuantity, existingItem } =
@@ -23,6 +24,10 @@ export const ProductItem = ({ product }) => {
 
 	return (
 		<div className='p-6 rounded-xl hover:shadow-xl hover:bg-white duration-300 cursor-pointer hover:scale-[1.02] transition'>
+			<div className='flex justify-end'>
+				<FavoriteButton product={product} />
+			</div>
+
 			<Link to={`/product/${product.id}`}>
 				<div className='flex flex-col gap-2 justify-center'>
 					<div className='w-full h-[300px]'>
