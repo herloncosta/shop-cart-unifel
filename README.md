@@ -1,12 +1,75 @@
-# React + Vite
+# shop-cart-unifel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sobre o Projeto
 
-Currently, two official plugins are available:
+Este é um projeto de carrinho de compras desenvolvido como parte de um exercício ou projeto de estudo. A aplicação permite aos usuários navegar por uma lista de produtos, adicioná-los ao carrinho, visualizar o carrinho e finalizar a compra.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+O projeto foi construído com as seguintes tecnologias:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React:** Uma biblioteca JavaScript para construir interfaces de usuário.
+- **Vite:** Um construtor de front-end que visa fornecer uma experiência de desenvolvimento mais rápida e enxuta.
+- **React Router DOM:** Para roteamento e navegação entre as páginas da aplicação.
+- **Tailwind CSS:** Um framework CSS utilitário para criar designs personalizados rapidamente.
+- **Lucide React:** Uma biblioteca de ícones SVG.
+- **Zustand:** Um pequeno, rápido e escalável gerenciador de estado para React.
+- **Sonner:** Uma biblioteca de notificações para React.
+- **ESLint:** Para linting de código JavaScript e JSX.
+
+## Instalação e Execução
+
+Siga os passos abaixo para instalar e executar o projeto localmente:
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/en/) (versão 18 ou superior)
+- [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+
+### Passos
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone https://github.com/herloncosta/shop-cart-unifel.git
+   ```
+
+2. **Navegue até o diretório do projeto:**
+
+   ```bash
+   cd shop-cart-unifel
+   ```
+
+3. **Instale as dependências:**
+
+   ```bash
+   npm install
+   ```
+
+4. **Execute o projeto em modo de desenvolvimento:**
+
+   ```bash
+   npm run dev
+   ```
+
+   A aplicação estará disponível em `http://localhost:5173` (ou em outra porta, se a 5173 estiver em uso).
+
+### Outros Comandos
+
+- **Build para produção:**
+
+  ```bash
+  npm run build
+  ```
+
+- **Lint:**
+
+  ```bash
+  npm run lint
+  ```
+
+- **Preview da build:**
+
+  ```bash
+  npm run preview
+  ```
