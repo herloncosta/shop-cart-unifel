@@ -1,4 +1,11 @@
 {
+	"linter": {
+		"rules": {
+			"a11y": {
+				"useAltText": "off"
+			}
+		}
+	},
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": false,
