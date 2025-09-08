@@ -4,7 +4,7 @@ const CartContext = createContext(undefined)
 
 const cartReducer = (state, action) => {
 	const existingItem = state.cartItems.find(
-		(item) => item.id === action.payload.id,
+		(item) => item.id === action.payload?.id,
 	)
 
 	switch (action.type) {

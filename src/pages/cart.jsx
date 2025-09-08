@@ -118,7 +118,7 @@ export const Cart = () => {
 									className='flex items-center gap-2 px-4 py-2 mt-4 bg-slate-500 text-white rounded font-bold cursor-pointer hover:bg-slate-600 transition'
 									onClick={() => navigate("/checkout")}
 								>
-									Ir para o checkout
+									Finalizar pedido
 									<ArrowRight />
 								</button>
 							</div>
